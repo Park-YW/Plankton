@@ -32,7 +32,7 @@ public class ResourceManager : MonoBehaviour
     }
 
     // 자원 추가
-    public void AddResource(string resourceType, int amount)
+    public void AddResource(string resourceType, int amount) //자원 이름과 추가할 수량
     {
         if (resources.ContainsKey(resourceType))
         {
@@ -47,7 +47,7 @@ public class ResourceManager : MonoBehaviour
     // 자원 소비
     public bool UseResource(string resourceType, int amount)
     {
-        if (resources.ContainsKey(resourceType) && resources[resourceType] >= amount)
+        if (resources.ContainsKey(resourceType) && resources[resourceType] >= amount) //자원 이름과 사용할 수량
         {
             resources[resourceType] -= amount;
             return true;
@@ -60,7 +60,7 @@ public class ResourceManager : MonoBehaviour
     }
 
     // 자원 조회
-    public int GetResourceAmount(string resourceType)
+    public int GetResourceAmount(string resourceType) //자원 이름
     {
         if (resources.ContainsKey(resourceType))
         {

@@ -1,21 +1,46 @@
+using System;
 using UnityEngine;
 
 public class BlockSpawn : MonoBehaviour
 {
-    public GameObject blockPrefab; // 생성할 블록 프리팹
+    public GameObject[] blockPrefabs; // 생성할 블록 프리팹들 0번 흙, 1번 나무, 2번 돌, 3번 철, 4번 강철, 5번 티타늄
     public Camera mainCamera;      // 주 카메라
     public LayerMask backgroundLayer; // 배경 레이어 마스크
     public bool ableToSpawn;
+    private string[] whatBlock = { "흙","나무","돌","철","강철","티타늄"}; //0번 흙, 1번 나무, 2번 돌, 3번 철, 4번 강철, 5번 티타늄
+    private int index = 0;
+
+    private void Start()
+    {
+        index = 0;
+    }
     void Update()
     {
-        // 마우스 왼쪽 버튼이 클릭되었는지 확인
-        if (Input.GetMouseButtonDown(0))
-        {
-            SpawnBlockIfBackgroundOnly();
-        }
+        if (Input.GetMouseButtonDown(0)){ SpawnBlockIfBackgroundOnly(whatBlock[index]); } //마우스 좌클릭 시 블록 생성
+        ChangeBlock(); //스크롤을 통해서 블록 바꾸기
     }
 
-    void SpawnBlockIfBackgroundOnly()
+    void ChangeBlock()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        // 스크롤 업일 경우 index 증가
+        if (scroll > 0f)
+        {
+            index++;
+            if (index >= whatBlock.Length) index = 0; // 마지막 인덱스에서 처음으로 순환
+        }
+        // 스크롤 다운일 경우 index 감소
+        else if (scroll < 0f)
+        {
+            index--;
+            if (index < 0) index = whatBlock.Length - 1; // 첫 인덱스에서 마지막으로 순환
+        }
+
+        Debug.Log("현재 블록: " + whatBlock[index]);
+    }
+
+    void SpawnBlockIfBackgroundOnly(string block)
     {
         // 마우스 위치를 기준으로 Ray 생성 (2D 환경)
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -40,8 +65,11 @@ public class BlockSpawn : MonoBehaviour
         // 배경만 충돌했을 경우에만 블록 생성
         if (backgroundHit && !otherObjectHit && ableToSpawn)
         {
-            Instantiate(blockPrefab, mousePosition, Quaternion.identity);
-            Debug.Log("블록 생성 성공!");
+            if (ResourceManager.Instance.UseResource(block, 5)) //자원 5개를 사용하여 블록 하나를 만들 수 있음
+            {
+                Instantiate(blockPrefabs[index], mousePosition, Quaternion.identity);
+                Debug.Log("블록 생성 성공!");
+            }
         }
         else
         {
