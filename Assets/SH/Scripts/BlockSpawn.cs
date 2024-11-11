@@ -96,6 +96,11 @@ public class BlockSpawn : MonoBehaviour
             ableToDelete = true;
             blockToDelete = collision.gameObject;
         }
+        else
+        {
+            ableToDelete = false;
+            blockToDelete = null;
+        }
     }
 
     private void DeleteBlock()
