@@ -2556,8 +2556,10 @@ MonoBehaviour:
   backgroundLayer:
     serializedVersion: 2
     m_Bits: 8
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 64
   ableToSpawn: 0
-  whatBlock: -1
 --- !u!50 &1153566095
 Rigidbody2D:
   serializedVersion: 4
@@ -2570,7 +2572,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4250363823019494098}
   - component: {fileID: -8839933797443521630}
   - component: {fileID: -5180251079648764367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: B_Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

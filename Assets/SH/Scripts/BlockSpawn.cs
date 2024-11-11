@@ -5,10 +5,12 @@ public class BlockSpawn : MonoBehaviour
 {
     public GameObject[] blockPrefabs; // 생성할 블록 프리팹들 0번 흙, 1번 나무, 2번 돌, 3번 철, 4번 강철, 5번 티타늄
     public Camera mainCamera;      // 주 카메라
-    public LayerMask backgroundLayer; // 배경 레이어 마스크
+    public LayerMask backgroundLayer, blockLayer; // 배경 레이어 마스크
     public bool ableToSpawn;
     private string[] whatBlock = { "흙","나무","돌","철","강철","티타늄"}; //0번 흙, 1번 나무, 2번 돌, 3번 철, 4번 강철, 5번 티타늄
     private int index = 0;
+    private GameObject blockToDelete;
+    private bool ableToDelete = false;
 
     private void Start()
     {
@@ -17,6 +19,7 @@ public class BlockSpawn : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0)){ SpawnBlockIfBackgroundOnly(whatBlock[index]); } //마우스 좌클릭 시 블록 생성
+        if (Input.GetMouseButtonDown(1) && ableToDelete && blockToDelete != null) { Debug.Log("우클릭"); DeleteBlock(); }
         ChangeBlock(); //스크롤을 통해서 블록 바꾸기
     }
 
@@ -37,7 +40,7 @@ public class BlockSpawn : MonoBehaviour
             if (index < 0) index = whatBlock.Length - 1; // 첫 인덱스에서 마지막으로 순환
         }
 
-        Debug.Log("현재 블록: " + whatBlock[index]);
+        //Debug.Log("현재 블록: " + whatBlock[index]);
     }
 
     void SpawnBlockIfBackgroundOnly(string block)
@@ -79,7 +82,8 @@ public class BlockSpawn : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 3 ) //BackGroundLayer가 3번
+        // 배경 레이어를 감지하여 ableToSpawn 설정
+        if (collision.gameObject.layer == 3) // BackGroundLayer가 3번
         {
             ableToSpawn = true;
         }
@@ -87,5 +91,31 @@ public class BlockSpawn : MonoBehaviour
         {
             ableToSpawn = false;
         }
+        if(((1<<collision.gameObject.layer) & blockLayer) != 0)
+        {
+            ableToDelete = true;
+            blockToDelete = collision.gameObject;
+        }
     }
+
+    private void DeleteBlock()
+    {
+        string blockName = blockToDelete.name.Replace("(Clone)", "").Trim(); // "프리팹이름(Clone)"에서 "(Clone)" 제거
+        int blockIndex = Array.FindIndex(blockPrefabs, prefab => prefab.name == blockName);
+
+        if (blockIndex >= 0 && blockIndex < whatBlock.Length)
+        {
+            ResourceManager.Instance.AddResource(whatBlock[blockIndex], 5); // 자원 반환
+            Destroy(blockToDelete); // 블록 삭제
+            Debug.Log("블록 삭제 및 자원 반환 성공!");
+        }
+        else
+        {
+            Debug.LogWarning("블록 프리팹에 존재하지 않는 블록입니다.");
+        }
+
+        ableToDelete = false;
+        blockToDelete = null;
+    }
+
 }

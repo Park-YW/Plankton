@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4250363823019494098}
   - component: {fileID: -1238746089188772992}
   - component: {fileID: -7088398181013592951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: B_Titanium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
