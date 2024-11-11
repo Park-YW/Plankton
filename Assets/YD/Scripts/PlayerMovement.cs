@@ -11,7 +11,13 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundCheckRadius = 0.4f; // 감지 반경을 두 배로 설정
+    [SerializeField] private LayerMask groundLayer; // 레이어 마스크 추가
+
+    void Start()
+    {
+        InvokeRepeating("CheckIsGrounded", 0f, 0.1f);
+    }
 
     void Update()
     {
@@ -37,7 +43,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        // 지정된 레이어와의 충돌을 확인하여 땅에 닿아 있는지 확인
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
     private void Flip()
@@ -48,6 +55,20 @@ public class PlayerMovement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+    }
+
+    private void CheckIsGrounded()
+    {
+        Debug.Log("IsGrounded: " + IsGrounded());
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
 }
