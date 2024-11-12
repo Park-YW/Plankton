@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.4f; // 감지 반경을 두 배로 설정
-    [SerializeField] private LayerMask groundLayer; // 레이어 마스크 추가
+    [SerializeField] private LayerMask[] groundLayer; // 레이어 마스크 추가
 
     void Start()
     {
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         // 지정된 레이어와의 충돌을 확인하여 땅에 닿아 있는지 확인
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        return (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer[0]) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer[1]));
     }
 
     private void Flip()
