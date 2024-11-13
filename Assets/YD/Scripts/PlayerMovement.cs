@@ -39,6 +39,14 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (rb.velocity.x != 0f || rb.velocity.y != 0f)
+        {
+            GameManager.Instance.isPlayerMoving = true;
+        }
+        else
+        {
+            GameManager.Instance.isPlayerMoving = false;
+        }
     }
 
     private bool IsGrounded()
