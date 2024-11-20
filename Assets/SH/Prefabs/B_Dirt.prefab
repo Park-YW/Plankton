@@ -98,11 +98,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 533c0b06e2615ec48b2775dc7e5b3125, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

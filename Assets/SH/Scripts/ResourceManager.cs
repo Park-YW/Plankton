@@ -23,7 +23,7 @@ public class ResourceManager : MonoBehaviour
     public ItemList itemList; // 중앙에서 모든 아이템을 관리하는 리스트 (ScriptableObject)
 
     private List<Item> inven = new List<Item>(); // 플레이어 인벤토리
-    private int maxInventorySpace = 20; //인벤 사이즈
+    private int maxInventorySpace = 60; //인벤 사이즈
     private int currentInventorySpace = 0;
 
     private void Awake()
@@ -41,7 +41,13 @@ public class ResourceManager : MonoBehaviour
 
     private void Start()
     {
-        AddItem("흙", 20);
+        AddItem("흙", 10);
+        AddItem("나무", 10);
+        AddItem("돌", 10);
+        AddItem("철", 10);
+        AddItem("강철", 10);
+        AddItem("티타늄", 10);
+
     }
     public bool AddItem(string itemName, int amount)
     {
