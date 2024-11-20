@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemList", menuName = "Inventory/ItemList")]
@@ -22,8 +23,8 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance { get; private set; }
     public ItemList itemList; // 중앙에서 모든 아이템을 관리하는 리스트 (ScriptableObject)
 
-    private List<Item> inven = new List<Item>(); // 플레이어 인벤토리
-    private int maxInventorySpace = 60; //인벤 사이즈
+    public List<Item> inven = new List<Item>(); // 플레이어 인벤토리
+    public int maxInventorySpace = 60; //인벤 사이즈
     private int currentInventorySpace = 0;
 
     private void Awake()
