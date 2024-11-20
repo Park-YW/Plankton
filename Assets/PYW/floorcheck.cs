@@ -1,29 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Floorcheck : MonoBehaviour
 {
     Rigidbody2D rb;
-    public bool isFloorTouch;
+    public bool isFloorTouch = true;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Floor"))
+
+
+    private void OnTriggerStay2D(Collider2D collision)
+    { 
+        if (collision.CompareTag("Block"))
         {
+            Debug.Log("f");
             isFloorTouch = true;
         }
-        else
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Block"))
         {
+            Debug.Log("f");
             isFloorTouch = false;
         }
-        
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        isFloorTouch = false;
     }
 }

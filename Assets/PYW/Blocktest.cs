@@ -10,14 +10,14 @@ public class Blocktest : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        
-        rb.drag = 10000;
+
+        rb.isKinematic = true;
         StartCoroutine(FallTimer());
     }
     IEnumerator FallTimer()
     {
-        yield return new WaitForSeconds(3f);
-        rb.drag = 0;
+        yield return new WaitForSeconds(1.5f);
+        rb.isKinematic = false;
     }
 
     // Update is called once per frame

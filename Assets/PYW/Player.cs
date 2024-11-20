@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Player Settings")]
-    public float moveSpeed = 5f;        // 이동 속도
+    public float moveSpeed = 3f;        // 이동 속도
     public float jumpForce = 0.005f;       // 점프 힘
     public int maxJumps = 2;            // 최대 점프 횟수 (이중 점프 구현)
 
@@ -20,6 +20,10 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
 
     public GameObject buildBlock;
+
+    private float abilityTimer = 0;
+    public int maxBlockstep = 5;
+    private int Blockstep = 0;
 
     void Start()
     {
@@ -36,15 +40,37 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !floorcheck.isFloorTouch)
+        if (Input.GetKey(KeyCode.LeftShift) && !floorcheck.isFloorTouch)
         {
             GroundBuild();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            Blockstep = 0;
         }
     }
 
     void GroundBuild()
     {
-        Instantiate(buildBlock, floorcheck.transform);
+        if ( abilityTimer == 0 )
+        {
+            if(Blockstep < maxBlockstep)
+            {
+                Instantiate(buildBlock, floorcheck.transform.position, Quaternion.identity);
+                Blockstep++;
+                abilityTimer += Time.deltaTime;
+            }
+        }
+        else
+        {
+            abilityTimer += Time.deltaTime;
+        }
+        if ( abilityTimer > 0.03f )
+        {
+            abilityTimer = 0;
+        }
+        
+        
     }
     void Move()
     {
