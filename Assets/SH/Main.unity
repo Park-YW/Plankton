@@ -3580,7 +3580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344f0f7867664044499de89fa7f159c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemList: {fileID: 11400000, guid: e7e9e4ecf84bd554ab9de1835def84c1, type: 2}
+  itemList: {fileID: 11400000, guid: 207c0018d29318849b5f2fd07f680e32, type: 2}
   inven: []
   maxInventorySpace: 500
 --- !u!114 &1585313160
