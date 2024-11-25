@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public bool isPlayerMoving = false;
+    public bool isPlayerLadder = false;
 
 
     private void Awake()
