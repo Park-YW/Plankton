@@ -106,7 +106,7 @@ public class BlockSpawn : MonoBehaviour
         }
     }
 
-    private void DeleteBlock()
+    public void DeleteBlock()
     {
         string blockName = blockToDelete.name.Replace("(Clone)", "").Trim(); // "프리팹이름(Clone)"에서 "(Clone)" 제거
         int blockIndex = System.Array.FindIndex(blockPrefabs, prefab => prefab.name == blockName);
