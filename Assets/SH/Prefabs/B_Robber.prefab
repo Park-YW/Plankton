@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: -8839933797443521630}
   - component: {fileID: -5180251079648764367}
   m_Layer: 6
-  m_Name: B_Steel
-  m_TagString: Untagged
+  m_Name: B_Robber
+  m_TagString: Steel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
