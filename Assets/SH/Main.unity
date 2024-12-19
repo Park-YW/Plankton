@@ -4926,7 +4926,8 @@ MonoBehaviour:
     m_Bits: 256
   - serializedVersion: 2
     m_Bits: 64
-  idleSprite: {fileID: 21300000, guid: 6f8cb3cfcf75a43afb621d73d3a77632, type: 3}
+  idleSprite1: {fileID: 21300000, guid: 24439fbae15654e46b9a552fb1ec0b08, type: 3}
+  idleSprite2: {fileID: 21300000, guid: 6f8cb3cfcf75a43afb621d73d3a77632, type: 3}
   jumpUpSprite: {fileID: 21300000, guid: 2286737cae5d740a9b730380356a7231, type: 3}
   jumpDownSprite: {fileID: 21300000, guid: 88a30ca4906e64f398dc7036982161f3, type: 3}
 --- !u!50 &745241099
