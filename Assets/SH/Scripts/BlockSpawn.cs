@@ -10,6 +10,8 @@ public class BlockSpawn : MonoBehaviour
     private int index = 0;
     private GameObject blockToDelete;
     private bool ableToDelete = false;
+    private float holdTime = 0.0f; // 마우스 우클릭 유지 시간
+    public float requiredHoldTime = 1.0f; // 블록을 파괴하기 위한 최소 유지 시간
 
     private void Start()
     {
@@ -19,7 +21,21 @@ public class BlockSpawn : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) { SpawnBlockIfBackgroundOnly(whatBlock[index]); } // 마우스 좌클릭 시 블록 생성
-        if (Input.GetMouseButtonDown(1) && ableToDelete && blockToDelete != null) { DeleteBlock(); }
+
+        if (Input.GetMouseButton(1) && ableToDelete && blockToDelete != null)
+        {
+            holdTime += Time.deltaTime;
+            if (holdTime >= requiredHoldTime)
+            {
+                DeleteBlock();
+                holdTime = 0.0f; // 유지 시간 초기화
+            }
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            holdTime = 0.0f; // 우클릭을 떼면 유지 시간 초기화
+        }
+
         ChangeBlock(); // 스크롤을 통해서 블록 바꾸기
     }
 
