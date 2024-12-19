@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockSpawn : MonoBehaviour
@@ -22,16 +24,19 @@ public class BlockSpawn : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) { SpawnBlockIfBackgroundOnly(whatBlock[index]); } // 마우스 좌클릭 시 블록 생성
 
-        if (Input.GetMouseButton(1) && ableToDelete && blockToDelete != null)
+        if (Input.GetMouseButton(1))
         {
-            holdTime += Time.deltaTime;
-            if (holdTime >= requiredHoldTime)
+            if (ableToDelete && blockToDelete != null)
             {
-                DeleteBlock();
-                holdTime = 0.0f; // 유지 시간 초기화
+                holdTime += Time.deltaTime;
+                if (holdTime >= requiredHoldTime)
+                {
+                    DeleteBlock();
+                    holdTime = 0.0f; // 유지 시간 초기화
+                }
             }
         }
-        else if (Input.GetMouseButtonUp(1))
+        else
         {
             holdTime = 0.0f; // 우클릭을 떼면 유지 시간 초기화
         }
@@ -102,7 +107,7 @@ public class BlockSpawn : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         // 배경 레이어를 감지하여 ableToSpawn 설정
-        if (collision.gameObject.layer == 3) // BackGroundLayer가 3번
+        if (collision.gameObject.layer == 3)
         {
             ableToSpawn = true;
         }
@@ -110,6 +115,7 @@ public class BlockSpawn : MonoBehaviour
         {
             ableToSpawn = false;
         }
+
         if (((1 << collision.gameObject.layer) & blockLayer) != 0)
         {
             ableToDelete = true;

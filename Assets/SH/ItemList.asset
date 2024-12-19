@@ -53,11 +53,7 @@ MonoBehaviour:
     itemType: "\uADC0\uC911\uD488"
     itemQuantity: 1
     itemSize: 3
-  - itemName: "\uB4DC\uB9B4 \uD314 \uC124\uACC4\uB3C4"
-    itemType: "\uC124\uACC4\uB3C4"
-    itemQuantity: 1
-    itemSize: 5
-  - itemName: "\uB4DC\uB9B4\uD314+ \uC124\uACC4\uB3C4"
+  - itemName: "\uB4DC\uB9B4\uD314 \uC124\uACC4\uB3C4"
     itemType: "\uC124\uACC4\uB3C4"
     itemQuantity: 1
     itemSize: 5
