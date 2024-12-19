@@ -16,11 +16,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask[] groundLayer;
 
     [Header("Sprites")]
-    [SerializeField] private Sprite idleSprite;
+    [SerializeField] private Sprite idleSprite1;
+    [SerializeField] private Sprite idleSprite2;
     [SerializeField] private Sprite jumpUpSprite;
     [SerializeField] private Sprite jumpDownSprite;
 
     private SpriteRenderer spriteRenderer;
+    private bool isIdleAnimating = false;
 
     private void Awake()
     {
@@ -98,16 +100,34 @@ public class PlayerMovement : MonoBehaviour
             if (rb.velocity.y > 0)
             {
                 spriteRenderer.sprite = jumpUpSprite; // 상승 시 스프라이트
+                isIdleAnimating = false;
             }
             else if (rb.velocity.y < 0)
             {
                 spriteRenderer.sprite = jumpDownSprite; // 하강 시 스프라이트
+                isIdleAnimating = false;
             }
         }
         else
         {
-            spriteRenderer.sprite = idleSprite; // 기본 상태 스프라이트
+            if (!isIdleAnimating)
+            {
+                StartCoroutine(IdleAnimation());
+            }
         }
+    }
+
+    private IEnumerator IdleAnimation()
+    {
+        isIdleAnimating = true;
+        while (IsGrounded())
+        {
+            spriteRenderer.sprite = idleSprite1;
+            yield return new WaitForSeconds(0.5f);
+            spriteRenderer.sprite = idleSprite2;
+            yield return new WaitForSeconds(0.5f);
+        }
+        isIdleAnimating = false;
     }
 
     private void CheckIsGrounded()
