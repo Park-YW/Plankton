@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("CheckIsGrounded", 0f, 0.1f);
     }
 
     void Update()
@@ -128,11 +127,6 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         isIdleAnimating = false;
-    }
-
-    private void CheckIsGrounded()
-    {
-        //Debug.Log("IsGrounded: " + IsGrounded());
     }
 
     private void OnDrawGizmosSelected()
