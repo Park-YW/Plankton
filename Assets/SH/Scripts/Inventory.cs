@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject invenUI;
-    public TextMeshProUGUI inventext;
+    public TextMeshProUGUI[] inventext;
     public bool active = false;
     void Start()
     {
@@ -33,10 +33,11 @@ public class Inventory : MonoBehaviour
 
     public void UpdateInven()
     {
-        inventext.text = "";
+        int tempCounter = 0;
         foreach (Item item in ResourceManager.Instance.inven)
         {
-            inventext.text += $"{item.itemName} : {item.itemQuantity} || °ø°£: {item.itemSize * item.itemQuantity} || {item.itemType}\n";
+            inventext[tempCounter].text = item.itemQuantity.ToString();
+            tempCounter++;
         }
     }
 
