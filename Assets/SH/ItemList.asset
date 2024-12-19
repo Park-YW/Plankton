@@ -45,3 +45,11 @@ MonoBehaviour:
     itemType: "\uADC0\uC911\uD488"
     itemQuantity: 0
     itemSize: 3
+  - itemName: "\uC624\uB798\uB41C \uAE30\uACC4\uC870\uAC01"
+    itemType: "\uADC0\uC911\uD488"
+    itemQuantity: 0
+    itemSize: 3
+  - itemName: "\uB179\uC2A8 \uD1B1\uB2C8\uBC14\uD034"
+    itemType: "\uADC0\uC911\uD488"
+    itemQuantity: 0
+    itemSize: 3
