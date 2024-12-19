@@ -8,6 +8,14 @@ public class ButtonController : MonoBehaviour
 
     void Update()
     {
+            if (isButtonPressed)
+            {
+                connectedDoor.OpenDoor(); // 문을 여는 함수 호출
+            }
+            else
+            {
+                connectedDoor.CloseDoor(); // 버튼이 눌리지 않았을 때 문을 닫음
+            }
 
     }
 
@@ -15,7 +23,7 @@ public class ButtonController : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("BlockLayer"))
         {
-            connectedDoor.OpenDoor();
+            isButtonPressed = true;
         }
     }
 
@@ -23,7 +31,7 @@ public class ButtonController : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("BlockLayer"))
         {
-            connectedDoor.CloseDoor();
+            isButtonPressed=false;
         }
     }
 }

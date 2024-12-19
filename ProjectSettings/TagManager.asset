@@ -11,8 +11,6 @@ TagManager:
   - Stone
   - Steel
   - Titanium
-  - Spike
-  - Save
   layers:
   - Default
   - TransparentFX
