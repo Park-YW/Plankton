@@ -21,11 +21,11 @@ MonoBehaviour:
     itemType: "\uC790\uC6D0"
     itemQuantity: 0
     itemSize: 1
-  - itemName: "\uCCA0"
+  - itemName: "\uAC15\uCCA0"
     itemType: "\uC790\uC6D0"
     itemQuantity: 0
     itemSize: 3
-  - itemName: "\uAC15\uCCA0"
+  - itemName: "\uCCA0"
     itemType: "\uC790\uC6D0"
     itemQuantity: 0
     itemSize: 4
@@ -37,11 +37,43 @@ MonoBehaviour:
     itemType: "\uC790\uC6D0"
     itemQuantity: 0
     itemSize: 2
-  - itemName: 
-    itemType: 
-    itemQuantity: 0
-    itemSize: 0
   - itemName: "\uC624\uB798\uB41C \uD1B1\uB2C8\uBC14\uD034"
     itemType: "\uADC0\uC911\uD488"
-    itemQuantity: 0
+    itemQuantity: 1
     itemSize: 3
+  - itemName: "\uC624\uB798\uB41C \uAE30\uACC4\uC870\uAC01"
+    itemType: "\uADC0\uC911\uD488"
+    itemQuantity: 1
+    itemSize: 3
+  - itemName: "\uB179\uC2A8 \uD1B1\uB2C8\uBC14\uD034"
+    itemType: "\uADC0\uC911\uD488"
+    itemQuantity: 1
+    itemSize: 3
+  - itemName: "\uB179\uC2A8 \uB808\uBC84"
+    itemType: "\uADC0\uC911\uD488"
+    itemQuantity: 1
+    itemSize: 3
+  - itemName: "\uB4DC\uB9B4 \uD314 \uC124\uACC4\uB3C4"
+    itemType: "\uC124\uACC4\uB3C4"
+    itemQuantity: 1
+    itemSize: 5
+  - itemName: "\uB4DC\uB9B4\uD314+ \uC124\uACC4\uB3C4"
+    itemType: "\uC124\uACC4\uB3C4"
+    itemQuantity: 1
+    itemSize: 5
+  - itemName: "\uB4DC\uB9B4\uD314+ \uC124\uACC4\uB3C4"
+    itemType: "\uC124\uACC4\uB3C4"
+    itemQuantity: 1
+    itemSize: 5
+  - itemName: USB
+    itemType: "\uADC0\uC911\uD488"
+    itemQuantity: 2
+    itemSize: 0
+  - itemName: "\uBD80\uC2A4\uD130 \uC124\uACC4\uB3C4"
+    itemType: "\uC124\uACC4\uB3C4"
+    itemQuantity: 1
+    itemSize: 5
+  - itemName: "\uC81C\uD2B8\uD329 \uC124\uACC4\uB3C4"
+    itemType: "\uC124\uACC4\uB3C4"
+    itemQuantity: 1
+    itemSize: 5

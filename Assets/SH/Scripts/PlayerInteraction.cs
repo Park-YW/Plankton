@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour
     public LayerMask resourceLayer; //자원을 얻을 수 있는 레이어 마스크
     public LayerMask chestLayer; // 상자 레이어 마스크
     public float interactionHoldTime = 1.0f; // 자원을 얻기 위해 E 키를 눌러야 하는 시간
+    private Vector3 savePoint; // 저장된 세이브 위치
 
     private float holdTime = 0.0f;
     void Update()
@@ -91,5 +92,31 @@ public class PlayerInteraction : MonoBehaviour
     private void Shop()
     {
 
+    }
+
+    public void SetSavePoint(Vector3 position)
+    {
+        savePoint = position; // 저장된 세이브 위치 갱신
+        Debug.Log("세이브 포인트 갱신됨: " + savePoint);
+    }
+
+    public void RespawnAtSavePoint()
+    {
+        if (savePoint != null)
+        {
+            transform.position = savePoint; // 저장된 위치로 이동
+            Debug.Log("플레이어가 세이브 포인트로 이동했습니다: " + savePoint);
+        }
+        else
+        {
+            Debug.LogWarning("세이브 포인트가 설정되지 않았습니다!");
+        }
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Spike"))
+        {
+            RespawnAtSavePoint();
+        }
     }
 }
