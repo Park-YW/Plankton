@@ -8946,6 +8946,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   ableToSpawn: 0
+  requiredHoldTime: 1
 --- !u!50 &1153566095
 Rigidbody2D:
   serializedVersion: 4

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 2f;
     private float jumpingPower = 6f;
     private bool isFacingRight = true;
+    private Vector3 savePoint;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -20,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Start()
     {
-        InvokeRepeating("CheckIsGrounded", 0f, 0.1f);
     }
 
     void Update()
@@ -28,8 +28,13 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
+
         
-        
+        if(savePoint != null) {
+            Debug.Log(savePoint);
+
+        }
+
 
         if (Input.GetButtonDown("Jump") && IsGrounded() && !GameManager.Instance.isPlayerLadder)
         {
@@ -86,17 +91,37 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void CheckIsGrounded()
-    {
-        //Debug.Log("IsGrounded: " + IsGrounded());
-    }
-
     private void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Spike"))
+        {
+            RespawnAtSavePoint();
+        }
+    }
+    public void SetSavePoint(Vector3 position)
+    {
+        savePoint = position; // 새로운 세이브 포인트를 설정
+        Debug.Log("새로운 세이브 포인트 설정: " + savePoint);
+    }
+
+    private void RespawnAtSavePoint()
+    {
+        if (savePoint != null)
+        {
+            transform.position = savePoint; // 플레이어를 세이브 포인트로 이동
+            Debug.Log("플레이어가 세이브 포인트로 이동했습니다: " + savePoint);
+        }
+        else
+        {
+            Debug.LogWarning("세이브 포인트가 설정되지 않았습니다!");
         }
     }
 }
