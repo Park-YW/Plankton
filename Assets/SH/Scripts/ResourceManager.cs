@@ -51,7 +51,6 @@ public class ResourceManager : MonoBehaviour
         AddItem("Ã¶", 10);
         AddItem("°í¹«", 10);
         AddItem("Æ¼Å¸´½", 10);
-        AddItem("µå¸±ÆÈ ¼³°èµµ", 10);
 
     }
     public bool AddItem(string itemName, int amount)
