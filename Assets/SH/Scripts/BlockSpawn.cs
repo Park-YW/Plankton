@@ -8,7 +8,7 @@ public class BlockSpawn : MonoBehaviour
     public Camera mainCamera;      // 주 카메라
     public LayerMask backgroundLayer, blockLayer; // 배경 레이어 마스크
     public bool ableToSpawn;
-    private string[] whatBlock = { "흙", "나무", "돌", "철", "강철", "티타늄" }; // 0번 흙, 1번 나무, 2번 돌, 3번 철, 4번 강철, 5번 티타늄
+    private string[] whatBlock = { "흙", "나무", "돌", "철", "고무", "티타늄" }; // 0번 흙, 1번 나무, 2번 돌, 3번 철, 4번 고무, 5번 티타늄
     private int index = 0;
     private GameObject blockToDelete;
     private bool ableToDelete = false;

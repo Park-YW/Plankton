@@ -3,8 +3,6 @@ using UnityEngine;
 public class ButtonController : MonoBehaviour
 {
     public DoorController connectedDoor; // 버튼과 연결된 문
-    private bool isPlayerInRange = false;
-    private bool isButtonPressed = false;
 
     void Update()
     {

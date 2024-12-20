@@ -50,8 +50,8 @@ public class PlayerInteraction : MonoBehaviour
                     Debug.Log("³ª¹« ÀÚ¿ø È¹µæ");
                     break;
                 case "Steel":
-                    ResourceManager.Instance.AddItem("°­Ã¶", 1);
-                    Debug.Log("°­Ã¶ ÀÚ¿ø È¹µæ");
+                    ResourceManager.Instance.AddItem("°í¹«", 1);
+                    Debug.Log("°í¹« ÀÚ¿ø È¹µæ");
                     break;
                 case "Titanium":
                     ResourceManager.Instance.AddItem("Æ¼Å¸´½", 1);
@@ -115,6 +115,10 @@ public class PlayerInteraction : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
+        {
+            RespawnAtSavePoint();
+        }
+        if (collision.gameObject.name == "Laser")
         {
             RespawnAtSavePoint();
         }

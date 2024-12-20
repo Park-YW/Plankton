@@ -91,8 +91,33 @@ public class LaserDevice : MonoBehaviour
                 {
                     // ºí·Ï ÆÄ±«
                     Destroy(hitObject);
-                    Debug.Log("ºí·Ï ÆÄ±«: " + hitObject.name);
-
+                    switch (hitObject.tag)
+                    {
+                        case "Iron":
+                            ResourceManager.Instance.AddItem("Ã¶", 1);
+                            Debug.Log("Ã¶ ÀÚ¿ø È¹µæ");
+                            break;
+                        case "Wood":
+                            ResourceManager.Instance.AddItem("³ª¹«", 1);
+                            Debug.Log("³ª¹« ÀÚ¿ø È¹µæ");
+                            break;
+                        case "Steel":
+                            ResourceManager.Instance.AddItem("°í¹«", 1);
+                            Debug.Log("°í¹« ÀÚ¿ø È¹µæ");
+                            break;
+                        case "Titanium":
+                            ResourceManager.Instance.AddItem("Æ¼Å¸´½", 1);
+                            Debug.Log("Æ¼Å¸´½ ÀÚ¿ø È¹µæ");
+                            break;
+                        case "Stone":
+                            ResourceManager.Instance.AddItem("µ¹", 1);
+                            Debug.Log("µ¹ ÀÚ¿ø È¹µæ");
+                            break;
+                        case "Dirt":
+                            ResourceManager.Instance.AddItem("Èë", 1);
+                            Debug.Log("Èë ÀÚ¿ø È¹µæ");
+                            break;
+                    }
                     lineRenderer.positionCount++;
                     lineRenderer.SetPosition(lineRenderer.positionCount - 1, hitPoint);
                     break;

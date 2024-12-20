@@ -21,7 +21,7 @@ MonoBehaviour:
     itemType: "\uC790\uC6D0"
     itemQuantity: 0
     itemSize: 1
-  - itemName: "\uAC15\uCCA0"
+  - itemName: "\uACE0\uBB34"
     itemType: "\uC790\uC6D0"
     itemQuantity: 0
     itemSize: 3
@@ -86,10 +86,6 @@ MonoBehaviour:
     itemQuantity: 1
     itemSize: 5
   - itemName: "\uC81C\uD2B8\uD329"
-    itemType: "\uC5C5\uADF8\uB808\uC774\uB4DC"
-    itemQuantity: 1
-    itemSize: 5
-  - itemName: "\uC5D8\uB808\uBCA0\uC774\uD130"
     itemType: "\uC5C5\uADF8\uB808\uC774\uB4DC"
     itemQuantity: 1
     itemSize: 5
