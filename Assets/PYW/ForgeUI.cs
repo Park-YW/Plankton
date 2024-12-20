@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ForgeUI : MonoBehaviour
 {
-    public GameObject invenUI;
     public TextMeshProUGUI[] inventext;
     public Forge _forge;
     public bool active = false;
@@ -16,7 +15,7 @@ public class ForgeUI : MonoBehaviour
     }
     void Start()
     {
-        invenUI.SetActive(active);
+        gameObject.SetActive(active);
 
     }
 
@@ -33,7 +32,7 @@ public class ForgeUI : MonoBehaviour
 
     public void ToggleInven(bool active)
     {
-        invenUI.SetActive(active && _forge._isEntering);
+        gameObject.SetActive(active && _forge._isEntering);
         UpdateInven();
     }
 

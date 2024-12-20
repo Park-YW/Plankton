@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour
     public GameObject amountSlide;
     public Forge _forge;
     public GameObject ForgeUI;
+    public GameObject[] ForgeList;
     public bool active = false;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         invenUI.SetActive(active);
+        ForgeUI.SetActive(active);
         
     }
 
@@ -40,6 +42,7 @@ public class Inventory : MonoBehaviour
     public void ToggleInven(bool active)
     {
         invenUI.SetActive(active);
+        ForgeUI.SetActive(active && _forge._isEntering);
         UpdateInven();
     }
 
@@ -50,6 +53,21 @@ public class Inventory : MonoBehaviour
         {
             inventext[tempCounter].text = item.itemQuantity.ToString();
             tempCounter++;
+        }
+
+        List<string> craftlist = _forge.GetCraftList();
+        for (int i = 0; i < ForgeList.Length; i++)
+        {
+            TextMeshProUGUI text = ForgeList[i].GetComponentInChildren<TextMeshProUGUI>();
+            text.text = ResourceManager.Instance.GetResourceAmount(craftlist[i]).ToString();
+            if (ResourceManager.Instance.GetResourceAmount(craftlist[i]) <= 0)
+            {
+                text.color = Color.red;
+            }
+            else
+            {
+                text.color = Color.green;
+            }
         }
     }
 
