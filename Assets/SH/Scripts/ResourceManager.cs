@@ -25,7 +25,7 @@ public class ResourceManager : MonoBehaviour
 
     public List<Item> inven = new List<Item>(); // 플레이어 인벤토리
     public int maxInventorySpace = 60; //인벤 사이즈
-    private int currentInventorySpace = 0;
+    public int currentInventorySpace = 0;
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class ResourceManager : MonoBehaviour
         AddItem("나무", 10);
         AddItem("돌", 10);
         AddItem("철", 10);
-        AddItem("강철", 10);
+        AddItem("고무", 10);
         AddItem("티타늄", 10);
 
     }
@@ -103,11 +103,7 @@ public class ResourceManager : MonoBehaviour
             currentInventorySpace -= totalSize;
             Debug.Log("아이템 사용됨: " + itemToRemove.itemName + " x" + amount + " (공간 반환: " + totalSize + ")");
 
-            if (itemToRemove.itemQuantity == 0)
-            {
-                inven.Remove(itemToRemove);
-                Debug.Log("아이템 제거됨: " + itemToRemove.itemName);
-            }
+           
         }
         else
         {
@@ -185,6 +181,11 @@ public class ResourceManager : MonoBehaviour
             Debug.LogWarning("존재하지 않는 아이템입니다: " + itemName);
             return 0;
         }
+    }
+
+    public float GetTotalAmount()
+    {
+        return (float)currentInventorySpace / maxInventorySpace;
     }
 }
 
