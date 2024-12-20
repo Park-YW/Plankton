@@ -16,6 +16,8 @@ public class Inventory : MonoBehaviour
     public GameObject[] ForgeList;
     public bool active = false;
 
+    public Image imageList;
+
     private void Awake()
     {
         _forge = FindObjectOfType<Forge>();
@@ -35,6 +37,11 @@ public class Inventory : MonoBehaviour
             active = !active;
             ToggleInven(active);
 
+        }
+        if (_forge.isCraft)
+        {
+            _forge.isCraft = false;
+            UpdateInven();
         }
         amountSlide.GetComponent<Slider>().value = ResourceManager.Instance.GetTotalAmount();
     }
@@ -59,16 +66,45 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < ForgeList.Length; i++)
         {
             TextMeshProUGUI text = ForgeList[i].GetComponentInChildren<TextMeshProUGUI>();
-            text.text = ResourceManager.Instance.GetResourceAmount(craftlist[i]).ToString();
-            if (ResourceManager.Instance.GetResourceAmount(craftlist[i]) <= 0)
+            Image image = ForgeList[i].GetComponent<Image>();
+            if (i == 0)
             {
-                text.color = Color.red;
+                text.text = "1";
+                if (ResourceManager.Instance.GetResourceAmount(craftlist[i]) <=0)
+                {
+                    text.color = Color.red;
+                }
+                else
+                {
+                    text.color = Color.green;
+                }
+
+
             }
             else
             {
-                text.color = Color.green;
+                text.text = _forge.ListToMake[_forge._currentNumber].needs[craftlist[i]].ToString();
+                if (ResourceManager.Instance.GetResourceAmount(craftlist[i]) < _forge.ListToMake[_forge._currentNumber].needs[craftlist[i]])
+                {
+                    text.color = Color.red;
+                }
+                else
+                {
+                    text.color = Color.green;
+                }
             }
+
+
+            
+            
         }
+        for (int i = 3;i >= ForgeList.Length; i--)
+        {
+            TextMeshProUGUI text = ForgeList[i].GetComponentInChildren<TextMeshProUGUI>();
+            text.text = "0";
+            text.color = Color.green;
+        }
+
     }
 
 }
