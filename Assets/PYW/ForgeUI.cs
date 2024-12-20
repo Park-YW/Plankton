@@ -1,18 +1,13 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour
+public class ForgeUI : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject invenUI;
     public TextMeshProUGUI[] inventext;
-    public GameObject amountSlide;
     public Forge _forge;
-    public GameObject ForgeUI;
     public bool active = false;
 
     private void Awake()
@@ -22,7 +17,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         invenUI.SetActive(active);
-        
+
     }
 
     // Update is called once per frame
@@ -34,12 +29,11 @@ public class Inventory : MonoBehaviour
             ToggleInven(active);
 
         }
-        amountSlide.GetComponent<Slider>().value = ResourceManager.Instance.GetTotalAmount();
     }
 
     public void ToggleInven(bool active)
     {
-        invenUI.SetActive(active);
+        invenUI.SetActive(active && _forge._isEntering);
         UpdateInven();
     }
 
@@ -52,5 +46,4 @@ public class Inventory : MonoBehaviour
             tempCounter++;
         }
     }
-
 }
