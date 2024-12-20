@@ -89,6 +89,10 @@ MonoBehaviour:
     itemType: "\uC5C5\uADF8\uB808\uC774\uB4DC"
     itemQuantity: 1
     itemSize: 5
+  - itemName: "\uC5D8\uB808\uBCA0\uC774\uD130 \uC124\uACC4\uB3C4"
+    itemType: "\uC124\uACC4\uB3C4"
+    itemQuantity: 1
+    itemSize: 5
   - itemName: "\uC5D8\uB808\uBCA0\uC774\uD130"
     itemType: "\uC5C5\uADF8\uB808\uC774\uB4DC"
     itemQuantity: 1
