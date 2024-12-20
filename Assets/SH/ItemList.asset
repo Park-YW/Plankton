@@ -73,3 +73,19 @@ MonoBehaviour:
     itemType: "\uC124\uACC4\uB3C4"
     itemQuantity: 1
     itemSize: 5
+  - itemName: "\uC81C\uD2B8\uD329"
+    itemType: "\uC7A5\uBE44"
+    itemQuantity: 1
+    itemSize: 0
+  - itemName: "\uBD80\uC2A4\uD130"
+    itemType: "\uC7A5\uBE44"
+    itemQuantity: 1
+    itemSize: 0
+  - itemName: "\uB4DC\uB9B4\uD314"
+    itemType: "\uC7A5\uBE44"
+    itemQuantity: 1
+    itemSize: 0
+  - itemName: "\uB4DC\uB9B4\uD314+"
+    itemType: "\uC7A5\uBE44"
+    itemQuantity: 1
+    itemSize: 0

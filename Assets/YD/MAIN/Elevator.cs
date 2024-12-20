@@ -35,9 +35,12 @@ public class Elevator : MonoBehaviour
     {
         CheckPlayerProximity();
 
-        if (isPlayerOnBottom && Input.GetKeyDown(KeyCode.L))
+        if (isPlayerOnBottom && Input.GetKeyDown(KeyCode.E))
         {
-            TeleportToTop();
+            if(ResourceManager.Instance.HasItem("¿À·¡µÈ Åé´Ï¹ÙÄû") && ResourceManager.Instance.HasItem("¿À·¡µÈ ±â°èÁ¶°¢") && ResourceManager.Instance.HasItem("³ì½¼ Åé´Ï¹ÙÄû") && ResourceManager.Instance.HasItem("³ì½¼ ·¹¹ö"))
+            {
+                TeleportToTop();
+            }
         }
     }
 

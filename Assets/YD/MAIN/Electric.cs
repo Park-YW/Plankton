@@ -65,16 +65,17 @@ public class ElectricFieldTrigger : MonoBehaviour
         // 충돌한 객체가 블록 레이어에 속해 있는지 확인합니다.
         if (((1 << collision.gameObject.layer) & blockLayer) != 0)
         {
-            Debug.Log("블록이 전기장에 접촉하였습니다: " + collision.gameObject.name);
-
-            // 블록에 Electric 스크립트를 추가하여 새로운 전기장을 생성하도록 합니다.
-            Electric electricBlock = collision.gameObject.GetComponent<Electric>();
-            if (electricBlock == null)
+            if (collision.gameObject.CompareTag("Iron"))
             {
-                electricBlock = collision.gameObject.AddComponent<Electric>();
-                electricBlock.electricRadius = electricRadius;
-                electricBlock.electricFieldPrefab = electricPrefab;
-                electricBlock.blockLayer = blockLayer;
+                // 블록에 Electric 스크립트를 추가하여 새로운 전기장을 생성하도록 합니다.
+                Electric electricBlock = collision.gameObject.GetComponent<Electric>();
+                if (electricBlock == null)
+                {
+                    electricBlock = collision.gameObject.AddComponent<Electric>();
+                    electricBlock.electricRadius = electricRadius;
+                    electricBlock.electricFieldPrefab = electricPrefab;
+                    electricBlock.blockLayer = blockLayer;
+                }
             }
         }
     }
