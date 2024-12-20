@@ -32,6 +32,7 @@ public class Forge : MonoBehaviour
         Dictionary<string, int> dictemp = new Dictionary<string, int>();
         dictemp.Add("µ¹", 10);
         dictemp.Add("³ª¹«", 20);
+        dictemp.Add("Ã¶", 0);
         CraftingList temp = new CraftingList("µå¸±ÆÈ", dictemp, "µå¸±ÆÈ ¼³°èµµ");
         ListToMake[0] = temp;
         dictemp = new Dictionary<string, int>();
