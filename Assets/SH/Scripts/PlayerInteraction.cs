@@ -118,9 +118,5 @@ public class PlayerInteraction : MonoBehaviour
         {
             RespawnAtSavePoint();
         }
-        if (collision.gameObject.name == "Laser")
-        {
-            RespawnAtSavePoint();
-        }
     }
 }

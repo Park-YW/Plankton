@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEditor.UI;
 
 public class GameStart : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameStart : MonoBehaviour
     private bool isFadingIn = true; // 텍스트가 서서히 나타나는 중인지 여부
     private float fadeSpeed = 2f;   // 텍스트 페이드 속도
     private Color originalColor;
+    public GameObject UI;
 
     void Start()
     {
@@ -59,7 +61,6 @@ public class GameStart : MonoBehaviour
 
     void LoadGameScene()
     {
-        // 인게임 씬으로 전환 (씬 이름을 "GameScene"으로 가정)
-        SceneManager.LoadScene("Main");
+        UI.SetActive(false);
     }
 }

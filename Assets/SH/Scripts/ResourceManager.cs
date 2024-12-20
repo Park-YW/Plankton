@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class ResourceManager : MonoBehaviour
     public List<Item> inven = new List<Item>(); // 플레이어 인벤토리
     public int maxInventorySpace = 60; //인벤 사이즈
     public int currentInventorySpace = 0;
+
+    public event Action OnItemAdded;
 
     private void Awake()
     {
@@ -64,6 +67,7 @@ public class ResourceManager : MonoBehaviour
 
         if (currentInventorySpace + totalSize <= maxInventorySpace)
         {
+            OnItemAdded?.Invoke();
             Item existingItem = inven.Find(i => i.itemName == itemName);
             if (existingItem != null)
             {
@@ -81,6 +85,7 @@ public class ResourceManager : MonoBehaviour
                 };
 
                 inven.Add(newItem);
+                
                 Debug.Log("새 아이템 추가됨: " + newItem.itemName + " x" + newItem.itemQuantity + " (차지하는 공간: " + totalSize + ")");
             }
 

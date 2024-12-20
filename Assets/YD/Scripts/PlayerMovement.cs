@@ -20,9 +20,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Sprite idleSprite2;
     [SerializeField] private Sprite jumpUpSprite;
     [SerializeField] private Sprite jumpDownSprite;
-
+    [SerializeField] private Sprite itemAdded;
+    public float changeDuration = 1f;
+    private Sprite originalSprite;
     private SpriteRenderer spriteRenderer;
-    private bool isIdleAnimating = false;
+
+    private float idleAnimationTimer = 0f; // Idle 애니메이션 타이머
+    private float idleAnimationInterval = 0.2f; // Idle 스프라이트 전환 간격
+    private bool isSpriteTemporarilyChanged = false; // 스프라이트 임시 변경 플래그
 
     private void Awake()
     {
@@ -32,9 +37,35 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        // ResourceManager의 이벤트 구독
+        ResourceManager.Instance.OnItemAdded += ChangeSpriteTemporarily;
+
+        // 원래 스프라이트 저장
+        if (spriteRenderer != null)
+        {
+            originalSprite = spriteRenderer.sprite;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // 이벤트 구독 해제
+        if (ResourceManager.Instance != null)
+        {
+            ResourceManager.Instance.OnItemAdded -= ChangeSpriteTemporarily;
+        }
     }
 
     void Update()
+    {
+        if (!isSpriteTemporarilyChanged)
+        {
+            UpdateMovement();
+            UpdateSprite();
+        }
+    }
+
+    private void UpdateMovement()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
@@ -50,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Flip();
-        UpdateSprite();
     }
 
     private void FixedUpdate()
@@ -76,11 +106,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool IsGrounded()
-    {
-        return (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer[0]) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer[1]));
-    }
-
     private void Flip()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
@@ -99,42 +124,48 @@ public class PlayerMovement : MonoBehaviour
             if (rb.velocity.y > 0)
             {
                 spriteRenderer.sprite = jumpUpSprite; // 상승 시 스프라이트
-                isIdleAnimating = false;
             }
             else if (rb.velocity.y < 0)
             {
                 spriteRenderer.sprite = jumpDownSprite; // 하강 시 스프라이트
-                isIdleAnimating = false;
             }
         }
-        else
+        else if (horizontal == 0f) // 가만히 있을 때만 Idle 애니메이션
         {
-            if (!isIdleAnimating)
+            idleAnimationTimer += Time.deltaTime;
+            if (idleAnimationTimer >= idleAnimationInterval)
             {
-                StartCoroutine(IdleAnimation());
+                idleAnimationTimer = 0f;
+                spriteRenderer.sprite = spriteRenderer.sprite == idleSprite1 ? idleSprite2 : idleSprite1;
             }
         }
     }
 
-    private IEnumerator IdleAnimation()
+    private void ChangeSpriteTemporarily()
     {
-        isIdleAnimating = true;
-        while (IsGrounded())
+        if (!isSpriteTemporarilyChanged)
         {
-            spriteRenderer.sprite = idleSprite1;
-            yield return new WaitForSeconds(0.5f);
-            spriteRenderer.sprite = idleSprite2;
-            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(ChangeSpriteCoroutine());
         }
-        isIdleAnimating = false;
     }
 
-    private void OnDrawGizmosSelected()
+    private IEnumerator ChangeSpriteCoroutine()
     {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        }
+        isSpriteTemporarilyChanged = true;
+        rb.velocity = Vector2.zero; // 이동 멈춤
+        Sprite previousSprite = spriteRenderer.sprite; // 기존 스프라이트 저장
+
+        spriteRenderer.sprite = itemAdded; // 임시 스프라이트 설정
+
+        yield return new WaitForSeconds(changeDuration);
+
+        spriteRenderer.sprite = previousSprite; // 기존 스프라이트 복구
+        isSpriteTemporarilyChanged = false;
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer[0]) ||
+               Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer[1]);
     }
 }

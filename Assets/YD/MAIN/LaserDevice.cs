@@ -46,10 +46,25 @@ public class LaserDevice : MonoBehaviour
         while (remainingLength > 0f && reflectionCount < maxReflections)
         {
             RaycastHit2D hit = Physics2D.Raycast(currentPoint, currentDirection, remainingLength, blockLayer);
-
-            if (hit.collider != null)
+            if (hit.collider != null) // null 체크 추가
             {
                 GameObject hitObject = hit.collider.gameObject;
+
+                // 플레이어와 충돌 여부 확인
+                if (hitObject.name == "Player")
+                {
+                    PlayerInteraction playerInteraction = hitObject.GetComponent<PlayerInteraction>();
+                    if (playerInteraction != null) // null 체크
+                    {
+                        playerInteraction.RespawnAtSavePoint();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("PlayerInteraction 컴포넌트를 찾을 수 없다");
+                    }
+                    break; // 레이저를 종료하거나 다른 처리
+                }
+
                 Vector3 hitPoint = hit.point;
 
                 // 레이저 리시버 객체와 충돌 확인
