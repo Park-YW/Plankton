@@ -21,7 +21,8 @@ public class Forge : MonoBehaviour
     public ForgePanel panel;
     public bool _isEntering = false;
     public CraftingList[] ListToMake;
-    int _currentNumber = 0;
+    public int _currentNumber = 0;
+    public bool isCraft = false;
 
     private void Awake()
     {  
@@ -66,12 +67,14 @@ public class Forge : MonoBehaviour
     {
 
         ResourceManager.Instance.CraftItem(ListToMake[_currentNumber].blueprint, ListToMake[_currentNumber].needs, ListToMake[_currentNumber].make);
+        isCraft = true;
     }
 
     public void ChangeCraftList()
     {
         _currentNumber++;
         _currentNumber %= 4;
+        isCraft = true;
     }
 
     public List<string> GetCraftList()
@@ -87,17 +90,6 @@ public class Forge : MonoBehaviour
     }
 
     PlayerMovement ff;
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<PlayerMovement>(out ff) && _isEntering)
-        {
-            panel.gameObject.transform.position = collision.transform.position + Vector3.up*1.2f;
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                //collision.gameObject.GetComponent<PlayerInteraction>().testcode();
-            }
-        }
-    }
 
     
     private void OnTriggerEnter2D(Collider2D collision)
